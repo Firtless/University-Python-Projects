@@ -14,11 +14,7 @@ cs_maps = [Dust2, Nuke, Inferno, Mirrage]
 map = input("Enter your map: ")
 
 for i in cs_maps:
-    if map == int(cs_maps[i]):
-        j = random.randint(1, len(map))
-    else:
-        print("Enter correctly")
-    i += 1
+
 
 if __name__ == "__main__":
-    print(map[j])
+    map = input("Enter your map: ")
