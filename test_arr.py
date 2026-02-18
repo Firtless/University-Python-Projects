@@ -13,6 +13,9 @@ class TestCheckArr(unittest.TestCase):
     def test_example_3(self):
         self.assertFalse(check_arr([1, 2, 2, 3, 2, 4, 5]))
 
+    def test_example_4(self):
+        self.assertTrue(check_arr([]))
+
 
 if __name__ == '__main__':
     unittest.main()

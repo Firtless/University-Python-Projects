@@ -1,5 +1,8 @@
 def check_arr(arr):
 
+    if len(arr) <= 2:
+        return True
+
     is_up = True
     is_down = True
 
