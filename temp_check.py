@@ -19,7 +19,7 @@ def temp_check(temp):
     elif is_down:
         return "Temp is going down"
     else:
-        return "Temp Undstable"
+        return "Temp Unstable"
 
 
 if __name__ == '__main__':
