@@ -1,4 +1,8 @@
+import math
+
+
 def min_board_space(n, w, h):
+    board_space = math.sqrt(n * w * h)
     min_num = min(w, h)
     max_num = max(w, h) * n
 
@@ -22,7 +26,3 @@ def min_board_space(n, w, h):
     print(f'the amount of steps: {steps}')
 
     return result
-
-
-# min1 = min_board_space(10000, 2, 3)
-# print(min1)
