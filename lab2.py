@@ -2,27 +2,21 @@ import math
 
 
 def min_board_space(n, w, h):
-    board_space = math.sqrt(n * w * h)
-    min_num = min(w, h)
-    max_num = max(w, h) * n
-
-    result = max_num
+    side = max(math.isqrt(n * w * h), max(w, h))
 
     steps = 0
 
-    while min_num <= max_num:
-
+    while True:
         steps += 1
-
-        avr = (min_num + max_num) // 2
-        count = (avr // w) * (avr // h)
+        count = (side // w) * (side // h)
 
         if count >= n:
-            result = avr
-            max_num = avr - 1
+            if ((side - 1) // w) * ((side - 1) // h) < n:
+                break
+            side -= 1
         else:
-            min_num = avr + 1
+            needed_ratio = math.sqrt(n // max(count, 1))
+            side = max(side + 1, int(side * needed_ratio))
 
     print(f'the amount of steps: {steps}')
-
-    return result
+    return side
