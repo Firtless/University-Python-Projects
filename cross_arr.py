@@ -18,12 +18,11 @@ task1(cross)
 def task2(multi_result):
     for a in arr_A:
         for b in arr_B:
-            result = a * b
-            multi_result.append(result)
+            multi_result.append((a, b))
 
 
 task2(multi_result)
 
 
 print(
-    f"common items: {cross} and cartesian product of two arrays: {multi_result}")
+    f"common items: {cross} /n and cartesian product of two arrays: {multi_result}")
