@@ -19,12 +19,11 @@ class TestBinaryTree(unittest.TestCase):
     #    / \
     #   4   5
 
-
-def test_unbalanced_example(self):
-    root = BinaryTree(1)
-    root.left = BinaryTree(2)
-    root.left.left = BinaryTree(3)
-    self.assertFalse(tree_balanced(root))
+    def test_unbalanced_example(self):
+        root = BinaryTree(1)
+        root.left = BinaryTree(2)
+        root.left.left = BinaryTree(3)
+        self.assertFalse(tree_balanced(root))
     # Heavily left-leaning tree
     #       1
     #      /
@@ -32,24 +31,21 @@ def test_unbalanced_example(self):
     #    /
     #   3
 
+    def test_empty_tree(self):
+        self.assertTrue(tree_balanced(None))
 
-def test_empty_tree(self):
-    self.assertTrue(tree_balanced(None))
+    def test_single_node(self):
+        root = BinaryTree(10)
+        self.assertTrue(tree_balanced(root))
 
-
-def test_single_node(self):
-    root = BinaryTree(10)
-    self.assertTrue(tree_balanced(root))
-
-
-def test_complex_unbalanced(self):
-    root = BinaryTree(1)
-    root.right = BinaryTree(2)
-    root.left = BinaryTree(3)
-    root.left.left = BinaryTree(4)
-    root.left.left.left = BinaryTree(5)
-    self.assertFalse(tree_balanced(root))
+    def test_complex_unbalanced(self):
+        root = BinaryTree(1)
+        root.right = BinaryTree(2)
+        root.left = BinaryTree(3)
+        root.left.left = BinaryTree(4)
+        root.left.left.left = BinaryTree(5)
+        self.assertFalse(tree_balanced(root))
 
 
-if __name__ == "__name__":
+if __name__ == "__main__":
     unittest.main()
