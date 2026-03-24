@@ -1,4 +1,5 @@
 import unittest
+import random
 from avl_priority_queue import AVLPriorityQueue
 
 
@@ -21,6 +22,10 @@ class TestPriorityQueue(unittest.TestCase):
     def test_empty_behavior(self):
         self.assertIsNone(self.pq.peek())
         self.assertIsNone(self.pq.pop())
+
+    def test_stress_and_balance(self):
+        priorities = list(range(1, 101))
+        random.shuffle(priorities)
 
 
 if __name__ == "__main__":
