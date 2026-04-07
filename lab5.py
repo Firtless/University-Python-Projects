@@ -28,19 +28,16 @@ def shortest_path(n, start, end):
 
 
 def process_file():
-    try:
-        with open('input.txt', 'r') as f:
-            lines = f.readlines()
-            n = int(lines[0])
-            start = tuple(map(int, lines[1].split(',')))
-            end = tuple(map(int, lines[2].split(',')))
+    with open('input.txt', 'r') as f:
+        lines = f.readlines()
+        n = int(lines[0])
+        start = tuple(map(int, lines[1].split(',')))
+        end = tuple(map(int, lines[2].split(',')))
 
-        result = shortest_path(n, start, end)
+    result = shortest_path(n, start, end)
 
-        with open('output.txt', 'w') as f:
-            f.write(str(result))
-    except FileNotFoundError:
-        pass
+    with open('output.txt', 'w') as f:
+        f.write(str(result))
 
 
 def unsorted_range(arr):
