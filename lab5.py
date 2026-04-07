@@ -31,9 +31,9 @@ def process_file():
     try:
         with open('input.txt', 'r') as f:
             lines = f.readlines()
-            n = int(lines[0].split('#')[0].strip())
-            start = tuple(map(int, lines[1].split('#')[0].strip().split(',')))
-            end = tuple(map(int, lines[2].split('#')[0].strip().split(',')))
+            n = int(lines[0])
+            start = tuple(map(int, lines[1].split(',')))
+            end = tuple(map(int, lines[2].split(',')))
 
         result = shortest_path(n, start, end)
 
