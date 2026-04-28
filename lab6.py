@@ -21,6 +21,7 @@ def beer_problem(n, b, preferences):
 
         min_count = float('inf')
 
+
         for beer in employees_likes[employee_idx]:
             selected_beers.add(beer)
             count = min_beers(employee_idx + 1, selected_beers)
