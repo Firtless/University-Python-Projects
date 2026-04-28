@@ -21,27 +21,27 @@ def union(parent, x, y):
     return False
 
 
-def spinner(duration):
+def run_spinner(duration):
     symbols = ['|', '/', '-', '\\']
     end_time = time.time() + duration
     i = 0
     while time.time() < end_time:
-        sys.stdout.write(f'\rScanning environment... {symbols[i % 4]}')
+        sys.stdout.write(
+            f'\rMapping Infrastructure Topology... {symbols[i % 4]}')
         sys.stdout.flush()
-        time.sleep(0.1)
+        time.sleep(0.3)
         i += 1
-    sys.stdout.write('\rScanning complete!          \n')
+    sys.stdout.write('\rScan Complete!                      \n')
 
 
-def run_simulation(file_path, random_wells_count=2):
+def run_simulation(file_path, random_wells_count=5):
     os.system('clear' if os.name == 'posix' else 'cls')
-    print("=== IoT TELECOM: INFRASTRUCTURE OPTIMIZER ===")
-    spinner(1.5)
+    print("=== IoT TELECOM: FULL-LABEL VISUALIZER ===")
+    run_spinner(1.0)
 
     edges = []
     nodes = set()
 
-    # 1. Load existing data
     try:
         with open(file_path, 'r') as f:
             reader = csv.reader(f)
@@ -51,65 +51,68 @@ def run_simulation(file_path, random_wells_count=2):
                     edges.append((int(w), u, v))
                     nodes.update([u, v])
     except FileNotFoundError:
-        print(
-            f"Warning: {file_path} not found. Starting with random data only.")
+        pass
 
-    # 2. Inject Random Wells
-    for i in range(random_wells_count):
+    for _ in range(random_wells_count):
         new_well = f"RND-{random.randint(10, 99)}"
-        if list(nodes):
+        if nodes:
             existing_well = random.choice(list(nodes))
             dist = random.randint(500, 3000)
             edges.append((dist, existing_well, new_well))
-            nodes.add(new_well)
-        else:
-            nodes.add(new_well)
+        nodes.add(new_well)
 
     if not nodes:
-        print("Error: No data available.")
         return
 
-    # 3. Simple Grid Visualization
-    print("\n--- GEOGRAPHICAL WELL MAP ---")
     node_list = sorted(list(nodes))
-    grid_size = 5
-    for r in range(grid_size):
-        line = "  "
-        for c in range(grid_size):
-            if (r * grid_size + c) < len(node_list):
-                line += f"[{node_list[r * grid_size + c]}]   "
-            else:
-                line += ".       "
-        print(line)
-    time.sleep(1)
+    coords = {}
 
-    # 4. Kruskal's Logic
+    for node in node_list:
+        while True:
+            x, y = random.randint(2, 70), random.randint(1, 18)
+            if all(abs(x - cx) > 8 or abs(y - cy) > 1 for cx, cy in coords.values()):
+                coords[node] = (x, y)
+                break
+
+    print("\n--- GEOGRAPHICAL NODE DEPLOYMENT (FULL LABELS) ---")
+    canvas = [[" " for _ in range(82)] for _ in range(20)]
+
+    for node, (x, y) in coords.items():
+        canvas[y][x] = "O"
+        for i, char in enumerate(node):
+            if x + i + 1 < 81:
+                canvas[y][x + i + 1] = char
+
+    for row in canvas:
+        print("".join(row))
+
+    print("-" * 82)
+    time.sleep(1.0)
+
     edges.sort()
     parent = {node: node for node in nodes}
-    total_length = 0
-    count = 0
+    total_length, count = 0, 0
 
-    print("\n--- BUILDING OPTIMAL NETWORK ---")
+    print("\n--- KRUSKAL'S OPTIMAL ROUTING ---")
     for weight, u, v in edges:
-        sys.stdout.write(f"Link: {u} <-> {v} ({weight}m) ")
-        time.sleep(0.4)
+        sys.stdout.write(f"Testing: {u:<7} <-> {v:<7} ({weight:>4}m) ")
+        sys.stdout.flush()
+        time.sleep(0.3)
 
         if union(parent, u, v):
             total_length += weight
             count += 1
-            print(">> [CONNECTED]")
+            print(">> [DEPLOYED]")
         else:
             print(">> [REDUNDANT]")
 
-    print("\n--- FINAL REPORT ---")
+    print("\n--- FINAL NETWORK STATUS ---")
     if count == len(nodes) - 1:
-        print(f"Integrity: SECURE")
-        print(f"Total Cable: {total_length}m")
+        print(f"Connectivity: SECURE | Total Cable: {total_length}m")
     else:
-        print(f"Integrity: FAILED (-1)")
-    print("============================================\n")
+        print(f"Connectivity: PARTIAL (-1)")
+    print("=" * 50 + "\n")
 
 
 if __name__ == "__main__":
-    # You can change '2' to any number of random wells you want
-    run_simulation('communication_wells.csv', random_wells_count=2)
+    run_simulation('communication_wells.csv', random_wells_count=8)
