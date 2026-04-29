@@ -115,4 +115,4 @@ def run_simulation(file_path, random_wells_count=5):
 
 
 if __name__ == "__main__":
-    run_simulation('communication_wells.csv', random_wells_count=8)
+    run_simulation('communication_wells.csv', random_wells_count=14)
